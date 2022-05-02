@@ -4,7 +4,7 @@ from dataclasses import dataclass
 import requests
 import config
 
-QUESTIONS_URl = 'https://jservice.io/api/random'
+QUESTIONS_URL = 'https://jservice.io/api/random'
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{config.POSTGRES_USER}:{config.POSTGRES_PASSWORD}@db/{config.POSTGRES_DB}'
@@ -31,7 +31,7 @@ db.create_all()
 def create_questions():
     try:
         questions_num = int(request.json['questions_num'])
-        r = requests.get(QUESTIONS_URl, params=dict(count=questions_num))
+        r = requests.get(QUESTIONS_URL, params=dict(count=questions_num))
         r.raise_for_status()
 
         for question in r.json():
